@@ -177,11 +177,8 @@ sorting=none
 % TABLA DE CONTENIDOS
 % ------------------------------------------------------------
 \tableofcontents
-\newpage
 \listoffigures
-\newpage
 \listoftables
-\newpage
 
 % ------------------------------------------------------------
 % CONTENIDO
@@ -483,7 +480,7 @@ Como alternativa se evaluó y descartó Visual Paradigm, herramienta igualmente 
 	\centering
 	\caption{StarUML vs. Visual Paradigm}
 	\label{tab:staruml_vp}
-	\begin{tabular}{|l|p{5cm}|p{5cm}|}
+	\begin{tabular}{|p{5cm}|p{5cm}|p{5cm}|}
 		\hline
 		\textbf{Criterio} & \textbf{StarUML (seleccionada)} & \textbf{Visual Paradigm (descartada)} \\
 		\hline
@@ -734,7 +731,7 @@ Para realizar la generación automática de código se abrió en StarUML el arch
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{figuras/Captura_-_Invocacion_del_generador_de_codigo_C_desde_StarUML.png}
+	\includegraphics[width=\textwidth]{figuras/Captura_-_Invocacion_del_generador_de_codigo_C_desde_StarUML.png}
 	\caption{Invocación del generador de código C\# desde StarUML.}
 	\label{fig:invocacion_generador}
 \end{figure}
@@ -743,7 +740,7 @@ La generación se ejecutó mediante la extensión C\# Code Generation and Revers
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{figuras/Captura_-_Seleccion_del_modelo_base_para_la_generacion_de_codigo.png}
+	\includegraphics[width=\textwidth]{figuras/Captura_-_Seleccion_del_modelo_base_para_la_generacion_de_codigo.png}
 	\caption{Selección del modelo base para la generación de código.}
 	\label{fig:seleccion_modelo}
 \end{figure}
@@ -754,7 +751,7 @@ El proceso inició aproximadamente a las 18:06 y tuvo una duración de 3 segundo
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{figuras/Captura_-_Archivos_C_generados_a_partir_del_modelo_UML_de_MundiPets.png}
+	\includegraphics[width=\textwidth]{figuras/Captura_-_Archivos_C_generados_a_partir_del_modelo_UML_de_MundiPets.png}
 	\caption{Archivos C\# generados a partir del modelo UML de MundiPets.}
 	\label{fig:archivos_generados}
 \end{figure}
@@ -783,7 +780,7 @@ El código generado se almacenó en la carpeta \texttt{C:\textbackslash Generado
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{figuras/Captura_-_Arbol_de_archivos_generado_a_partir_de_las_clases_UML_del_subsistema.png}
+	\includegraphics[width=\textwidth]{figuras/Captura_-_Arbol_de_archivos_generado_a_partir_de_las_clases_UML_del_subsistema.png}
 	\caption{Árbol de archivos generado a partir de las clases UML del subsistema.}
 	\label{fig:arbol_archivos}
 \end{figure}
@@ -819,7 +816,7 @@ En la Figura \ref{fig:arbol_archivos} se observa que el generador creó un archi
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{figuras/Captura_-_Trazabilidad_entre_las_clases_del_modelo_UML_y_los_archivos_C_generados.png}
+	\includegraphics[width=\textwidth]{figuras/Captura_-_Trazabilidad_entre_las_clases_del_modelo_UML_y_los_archivos_C_generados.png}
 	\caption{Trazabilidad entre las clases del modelo UML y los archivos C\# generados.}
 	\label{fig:trazabilidad}
 \end{figure}
@@ -835,7 +832,7 @@ Para verificar la validez sintáctica del código generado por StarUML, los arch
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{figuras/cap_primera_compilacion_errores.png}
+	\includegraphics[width=\textwidth]{figuras/cap_primera_compilacion_errores.png}
 	\caption{Primera compilación del código generado, con errores de incompatibilidad de tipos.}
 	\label{fig:primera-compilacion}
 \end{figure}
@@ -844,7 +841,7 @@ Tras corregir los tipos, la segunda compilación redujo los errores a tres, orig
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{figuras/cap_segunda_compilacion_tipos_corregidos.png}
+	\includegraphics[width=\textwidth]{figuras/cap_segunda_compilacion_tipos_corregidos.png}
 	\caption{Segunda compilación después de adaptar los tipos UML al lenguaje C\#.}
 	\label{fig:segunda-compilacion}
 \end{figure}
@@ -853,7 +850,7 @@ Después de corregir los tipos y los retornos incorrectos, \texttt{dotnet build}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{figuras/cap_compilacion_exitosa.png}
+	\includegraphics[width=\textwidth]{figuras/cap_compilacion_exitosa.png}
 	\caption{Compilación exitosa del código generado después de aplicar correcciones de compatibilidad.}
 	\label{fig:compilacion-exitosa}
 \end{figure}
@@ -862,7 +859,7 @@ Con el proyecto compilado, se ejecutó una prueba mínima (\texttt{dotnet run}) 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{figuras/cap_ejecucion_prueba_solicitudadopcion.png}
+	\includegraphics[width=\textwidth]{figuras/cap_ejecucion_prueba_solicitudadopcion.png}
 	\caption{Ejecución de una prueba estructural sobre la clase csSolicitudAdopcion.}
 	\label{fig:ejecucion-prueba}
 \end{figure}
@@ -892,7 +889,7 @@ Para comprobar la trazabilidad detallada entre el modelo y el código, se compar
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{figuras/cap_correspondencia_uml_csharp.png}
+	\includegraphics[width=\textwidth]{figuras/cap_correspondencia_uml_csharp.png}
 	\caption{Correspondencia entre la clase UML csSolicitudAdopcion y el archivo C\# generado.}
 	\label{fig:correspondencia-uml-cs}
 \end{figure}
@@ -969,7 +966,7 @@ La herramienta generó las clases, campos y firmas de los métodos, pero no prod
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{figuras/cap_comparacion_tipo_original_datetime.png}
+	\includegraphics[width=\textwidth]{figuras/cap_comparacion_tipo_original_datetime.png}
 	\caption{Comparación entre el código original generado y la corrección manual de tipos.}
 	\label{fig:comparacion-tipos}
 \end{figure}
@@ -978,7 +975,7 @@ StarUML generó los campos \texttt{fechaSolicitud} y \texttt{fechaRespuesta} con
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{figuras/cap_correccion_retornos_void.png}
+	\includegraphics[width=\textwidth]{figuras/cap_correccion_retornos_void.png}
 	\caption{Corrección manual de expresiones de retorno incompatibles con métodos void.}
 	\label{fig:correccion-retornos}
 \end{figure}
@@ -995,21 +992,21 @@ Como mejora del modelo, se añadió el atributo público \texttt{motivoCancelaci
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{figuras/cap_clase_antes.png}
+	\includegraphics[width=\textwidth]{figuras/cap_clase_antes.png}
 	\caption{Clase csSolicitudAdopcion antes de aplicar el cambio de round-trip engineering.}
 	\label{fig:clase_antes}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{figuras/cap_codigo_antes.png}
+	\includegraphics[width=\textwidth]{figuras/cap_codigo_antes.png}
 	\caption{Código de csSolicitudAdopcion antes de la regeneración.}
 	\label{fig:codigo_antes}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{figuras/cap_clase_despues.png}
+	\includegraphics[width=\textwidth]{figuras/cap_clase_despues.png}
 	\caption{Clase csSolicitudAdopcion después de incorporar el motivo de cancelación.}
 	\label{fig:clase_despues}
 \end{figure}
@@ -1022,7 +1019,7 @@ Una vez guardado el cambio en el modelo UML, se ejecutó nuevamente la extensió
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{figuras/cap_codigo_despues.png}
+	\includegraphics[width=\textwidth]{figuras/cap_codigo_despues.png}
 	\caption{Código de csSolicitudAdopcion después de regenerar el modelo modificado.}
 	\label{fig:codigo_despues}
 \end{figure}
@@ -1031,7 +1028,7 @@ La regeneración produjo una nueva versión del archivo \texttt{csSolicitudAdopc
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{figuras/cap_comparacion_codigo.png}
+	\includegraphics[width=\textwidth]{figuras/cap_comparacion_codigo.png}
 	\caption{Comparación del código antes y después de la regeneración.}
 	\label{fig:comparacion_codigo}
 \end{figure}
@@ -1081,69 +1078,69 @@ Como limitación general del ejercicio, se reconoce que la generación fue evalu
 
 \section{Anexos}
 % Contenido a completar.
-\subsection{Anexo A: Código fuente completo generado}
+\subsection*{Anexo A: Código fuente completo generado}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{figuras/csusuario.jpeg}
+	\includegraphics[width=\textwidth]{figuras/csusuario.jpeg}
 	\caption{Código generado --- csUsuario.cs}
 	\label{fig:anexo_csusuario}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{figuras/csusuariorol.jpeg}
+	\includegraphics[width=\textwidth]{figuras/csusuariorol.jpeg}
 	\caption{Código generado --- csUsuarioRol.cs}
 	\label{fig:anexo_csusuariorol}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{figuras/csrol.jpeg}
+	\includegraphics[width=\textwidth]{figuras/csrol.jpeg}
 	\caption{Código generado --- csRol.cs}
 	\label{fig:anexo_csrol}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{figuras/csmascota.jpeg}
+	\includegraphics[width=\textwidth]{figuras/csmascota.jpeg}
 	\caption{Código generado --- csMascota.cs}
 	\label{fig:anexo_csmascota}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{figuras/cshistorialmedico.jpeg}
+	\includegraphics[width=\textwidth]{figuras/cshistorialmedico.jpeg}
 	\caption{Código generado --- csHistorialMedico.cs}
 	\label{fig:anexo_cshistorialmedico}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{figuras/cspublicion.jpeg}
+	\includegraphics[width=\textwidth]{figuras/cspublicion.jpeg}
 	\caption{Código generado --- csPublicacion.cs}
 	\label{fig:anexo_cspublicacion}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{figuras/csdocvetrinario.jpeg}
+	\includegraphics[width=\textwidth]{figuras/csdocvetrinario.jpeg}
 	\caption{Código generado --- csDocumentoVeterinario.cs}
 	\label{fig:anexo_csdocumentoveterinario}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{figuras/cssolicitudadopcion.jpeg}
+	\includegraphics[width=\textwidth]{figuras/cssolicitudadopcion.jpeg}
 	\caption{Código generado --- csSolicitudAdopcion.cs}
 	\label{fig:anexo_cssolicitudadopcion}
 \end{figure}
 
-\subsection{Anexo B: Fragmento del generador de código}
+\subsection*{Anexo B: Fragmento del generador de código}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{figuras/codegeneretor.jpeg}
+	\includegraphics[width=\textwidth]{figuras/codegeneretor.jpeg}
 	\caption{Fragmento de \texttt{code-generator.js} --- función \texttt{getType()}}
 	\label{fig:anexo_codegenerator}
 \end{figure}
