@@ -10,6 +10,13 @@
 \fancyfoot[C]{\thepage}
 
 % ============================================================
+% IDIOMA Y CODIFICACIÓN  (mover ANTES de csquotes)
+% ============================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-tabla]{babel}
+
+% ============================================================
 % CITAS Y TEXTO
 % ============================================================
 \usepackage{csquotes}
@@ -20,10 +27,6 @@
 \usepackage{parskip}
 \setlength{\parskip}{4pt}
 \usepackage{enumitem}
-
-\makeatletter
-\@ifundefined{labelindent}{}{\let\labelindent\relax}
-\makeatother
 
 % ============================================================
 % IDIOMA Y CODIFICACIÓN
@@ -101,7 +104,7 @@
 % ============================================================
 \usepackage[
 backend=biber,
-style=ieee,
+style=numeric,
 sorting=none
 ]{biblatex}
 \addbibresource{referencias.bib}
@@ -117,11 +120,11 @@ sorting=none
 \begin{titlepage}
 	\centering
 	
-	{\large\bfseries UNIVERSIDAD TÉCNICA ESTATAL DE QUEVEDO\\[12pt]}
+	{\large\bfseries UNIVERSIDAD TÉCNICA ESTATAL DE QUEVEDO\\[10pt]}
 	
-	\includegraphics[width=0.3\textwidth]{Figuras/logo_uteq.png}\\[12pt]
+	\includegraphics[width=0.3\textwidth]{Figuras/logo_uteq.png}\\[6pt]
 	
-	{\large\bfseries FACULTAD DE CIENCIAS DE LA COMPUTACIÓN Y DISEÑO DIGITAL\\[4pt]
+	{\large\bfseries FACULTAD DE CIENCIAS DE LA COMPUTACIÓN Y DISEÑO DIGITAL\\[2pt]
 		CARRERA DE INGENIERÍA EN SOFTWARE}
 	\vspace{0.5cm}
 	
@@ -131,24 +134,27 @@ sorting=none
 		
 	{\normalsize\bfseries MATERIA:}\\[4pt]
 	{\normalsize INGENIERÍA DE REQUERIMIENTOS}
-	\vspace{0.5cm}
+	\vspace{0.3cm}
 	
-    {\normalsize\bfseries EQUIPO B}\\[6pt]
+    {\normalsize\bfseries EQUIPO B}\\[4pt]
+    \vspace{0.3cm}
+	
+	{\normalsize\bfseries INTEGRANTES:}\\[4pt]
+	
+    {CORDOVA CARREÑO MAYRA LUCILA} \textbf{(Investigadora)}\\
+    CI: 0750286775 - mcordovac2@uteq.edu.ec\
+    \vspace{0.5cm}
+    
+    {GUTIERREZ ORTEGA GENESIS ADRIANA} \textbf{(Titular / Líder / Modeladora UML)}\\
+    CI: 1250274477 - ggutierrezo@uteq.edu.ec\
+    \vspace{0.5cm}
+    
+    {NARANJO FLORES ANDERSON JEAMPIERE} \textbf{(Verificador)}\\
+    CI: 1207412659 - anaranjof2@uteq.edu.ec\
     \vspace{0.5cm}
 	
-	{\normalsize\bfseries INTEGRANTES:}\\[6pt]
-	
-     {CORDOVA CARREÑO MAYRA LUCILA},~CI: 0750286775 - mcordovac2@uteq.edu.ec\
-	\vspace{0.5cm}
-	
-	{GUTIERREZ ORTEGA GENESIS ADRIANA},~CI: 1250274477 - mcordovac2@uteq.edu.ec\
-	\vspace{0.5cm}
-	
-	{NARANJO FLORES ANDERSON JEAMPIERE},~CI: 1207412659 - anaranjof2@uteq.edu.ec\
-    \vspace{0.5cm}
-	
-	{\normalsize\bfseries SISTEMA PROYECTO FIN DE CURSO:}\\[4pt]
-	{\normalsize MUNDIPETS (GUTIERREZ GENESIS - TITULAR PFC)}\\[4pt]
+	{\normalsize\bfseries SISTEMA PROYECTO FIN DE CURSO:}\\[3pt]
+	{\normalsize MUNDIPETS (GUTIERREZ  GENESIS - TITULAR PFC)}\\[3pt]
 	\vspace{0.5cm}
 	
 	{\normalsize\bfseries CURSO:}\\[4pt]
@@ -175,6 +181,7 @@ sorting=none
 \listoffigures
 \newpage
 \listoftables
+\newpage
 
 % ------------------------------------------------------------
 % CONTENIDO
@@ -182,132 +189,963 @@ sorting=none
 
 \section{Resumen}
 % Contenido a completar.
+MundiPets es un sistema orientado a centralizar la información de mascotas y a facilitar los procesos de adopción y cruza responsable, conectando de forma organizada, transparente y segura a propietarios, adoptantes, interesados en cruza, refugios y veterinarias. El proyecto contempla, además, la incorporación de funcionalidades de apoyo basadas en inteligencia artificial alertas, recomendaciones preliminares y moderación de contenido que refuercen la calidad y seguridad de la información, sin sustituir la evaluación profesional veterinaria ni las decisiones definitivas sobre salud o reproducción de las mascotas.
+Como caso de aplicación del ciclo \textit{Model-Driven Development} (MDD), se seleccionó la herramienta CASE StarUML (versión 7.1.0) para la construcción del modelo UML de origen y la generación automática de código fuente, tomando como subsistema representativo el módulo de Gestión de Solicitud de Adopción, dado su carácter central en el flujo de negocio de la plataforma. A partir del diagrama de clases de este módulo, compuesto por ocho clases del dominio, se configuró el generador \textit{C\# Code Generation and Reverse Engineering} de StarUML para producir código fuente en C\#, con el fin de evidenciar la trazabilidad entre el modelo UML y el código producido, así como el cierre del ciclo mediante una prueba de \textit{roundtrip} controlada entre el modelo y el código generado.
 
 
-\section{Marco teórico}
+\section{Marco Teórico}
 
 \subsection{Model-Driven Engineering (MDE)}
-% Contenido a completar.
 
-\subsection{Model-Driven Architecture (MDA): CIM, PIM y PSM}
-% Contenido a completar.
+Model-Driven Engineering (MDE) es un paradigma de la ingeniería de software que posiciona a los modelos como artefactos de primera clase dentro del proceso de desarrollo, es decir, como elementos centrales y ejecutables, y no como simples documentos de apoyo. En este enfoque, el modelo se convierte en la fuente autoritativa del sistema, y las implementaciones se derivan de él mediante transformaciones automatizadas. Los modelos se definen con conceptos cercanos al dominio del problema, facilitando su comprensión y mantenimiento \cite{Bucchiarone2020}.
+
+MDE busca aumentar la productividad y la calidad del software mediante la creación sistemática de modelos. Según estudios recientes, MDE ha demostrado ser efectivo en múltiples dominios: el 56.8\% de los estudios se centran en desarrollo general, el 21.6\% en sistemas embebidos, y el 13.5\% en aplicaciones web. A pesar de sus beneficios, su adopción enfrenta barreras como la falta de conocimiento y habilidades, y las dificultades con las herramientas disponibles \cite{Bucchiarone2020}.
+
+\subsection{Model-Driven Architecture (MDA) --- CIM/PIM/PSM}
+
+Model-Driven Architecture (MDA) es una iniciativa del Object Management Group (OMG) que estructura el desarrollo en tres niveles de abstracción:
+
+\begin{table}[H]
+	\centering
+	\caption{Niveles de abstracción de MDA}
+	\label{tab:mda-niveles}
+	\begin{tabular}{|l|p{9cm}|}
+		\hline
+		\textbf{Nivel} & \textbf{Descripción} \\
+		\hline
+		CIM (Computation Independent Model) & Modelo de requisitos y contexto del negocio, sin detalles de implementación. Usa BPMN \cite{Zammel2025}. \\
+		\hline
+		PIM (Platform Independent Model) & Estructura y funcionalidad del sistema de manera abstracta. Usa UML \cite{Zammel2025}. \\
+		\hline
+		PSM (Platform Specific Model) & Información técnica de implementación en una plataforma particular (Java/Spring) \cite{Zammel2025}. \\
+		\hline
+	\end{tabular}
+\end{table}
+
+Los requisitos del CIM deben ser trazables hasta el PIM y PSM. Las transformaciones se realizan en dos etapas: CIM$\rightarrow$PIM y PIM$\rightarrow$PSM. La transformación CIM$\rightarrow$PIM es menos frecuente debido a las diferencias fundamentales entre ambos niveles \cite{Zammel2025}.
 
 \subsection{Model-Driven Development (MDD)}
-% Contenido a completar.
+
+Model-Driven Development (MDD) es la aplicación práctica de MDE, donde los modelos guían la construcción del sistema y el código se genera automáticamente. MDD mejora la productividad y la calidad del software, especialmente en proyectos complejos. Permite que expertos del dominio participen en el desarrollo mediante abstracciones de alto nivel \cite{Domingo2020}.
 
 \subsection{Transformaciones M2M}
-% Contenido a completar.
+
+Las transformaciones Model-to-Model (M2M) producen un modelo destino a partir de un modelo origen \cite{Troya2023}. Pueden ser:
+
+\begin{table}[H]
+	\centering
+	\caption{Tipos de transformación M2M}
+	\label{tab:m2m-tipos}
+	\begin{tabular}{|l|p{7cm}|}
+		\hline
+		\textbf{Tipo} & \textbf{Dirección} \\
+		\hline
+		Horizontal & Mismo nivel de abstracción \\
+		\hline
+		Vertical & Diferente nivel de abstracción (ej. PIM$\rightarrow$PSM) \\
+		\hline
+	\end{tabular}
+\end{table}
+
+El estándar OMG es QVT. Otros lenguajes incluyen ATL y EGL. La calidad de estas transformaciones es crítica para la fidelidad de los modelos generados. Los desafíos incluyen el manejo de colecciones, recursión y condiciones lógicas \cite{Troya2023}.
 
 \subsection{Transformaciones M2T}
-% Contenido a completar.
+
+Las transformaciones Model-to-Text (M2T) producen código fuente a partir de un modelo. El estándar OMG es MOFM2T, implementado por Acceleo. Otros lenguajes incluyen Xtend y EJS (usado por StarUML) \cite{Zafar2024}.
+
+\begin{table}[H]
+	\centering
+	\caption{Lenguajes de transformación M2T}
+	\label{tab:m2t-lenguajes}
+	\begin{tabular}{|l|l|p{6cm}|}
+		\hline
+		\textbf{Lenguaje} & \textbf{Estado} & \textbf{Características} \\
+		\hline
+		Acceleo & Mantenimiento pasivo & Implementa MOFM2T \\
+		\hline
+		Xtend & Futuro incierto & Tipado estático, integración Java \\
+		\hline
+		EJS & Activo & Basado en JavaScript, usado por StarUML \\
+		\hline
+	\end{tabular}
+\end{table}
 
 \subsection{Metamodelo}
-% Contenido a completar.
+
+Un metamodelo define la sintaxis abstracta de un lenguaje de modelado. UML se define sobre MOF \cite{Zafar2024}. La jerarquía de cuatro capas:
+
+\begin{table}[H]
+	\centering
+	\caption{Jerarquía de capas del metamodelo}
+	\label{tab:metamodelo-capas}
+	\begin{tabular}{|l|l|l|}
+		\hline
+		\textbf{Capa} & \textbf{Descripción} & \textbf{Ejemplo} \\
+		\hline
+		M3 & Meta-metamodelo & MOF \\
+		\hline
+		M2 & Metamodelo & Metamodelo UML \\
+		\hline
+		M1 & Modelo & Diagrama de clases de MundiPets \\
+		\hline
+		M0 & Instancias & Objetos en ejecución \\
+		\hline
+	\end{tabular}
+\end{table}
+
+Ecore es la herramienta líder (70.3\% de los estudios). La composición de modelos se clasifica en: basada en operador, basada en aspectos y basada en reglas \cite{Abouzahra2020}.
 
 \subsection{Perfiles UML}
-% Contenido a completar.
 
-\subsection{Plantilla o template}
-% Contenido a completar.
+Los Perfiles UML extienden el metamodelo UML sin modificarlo, mediante:
 
-\subsection{Forward, reverse y round-trip engineering}
-% Contenido a completar.
+\begin{table}[H]
+	\centering
+	\caption{Mecanismos de extensión de los perfiles UML}
+	\label{tab:perfiles-mecanismos}
+	\begin{tabular}{|l|p{8cm}|}
+		\hline
+		\textbf{Mecanismo} & \textbf{Descripción} \\
+		\hline
+		Estereotipo & Nueva variante de elemento UML \\
+		\hline
+		Valor etiquetado & Propiedades adicionales \\
+		\hline
+		Restricción & Reglas OCL \\
+		\hline
+		Extensión de metaclase & Extiende metaclases específicas \\
+		\hline
+	\end{tabular}
+\end{table}
 
-\subsection{Diagramas UML admisibles como origen}
-% Contenido a completar.
+Los perfiles más comunes se enfocan en sistemas embebidos, arquitectura empresarial, seguridad y desarrollo web \cite{Zafar2024}.
 
-\subsection{Estado del arte}
-% Contenido a completar.
+\subsection{Plantilla / Template}
+
+Las plantillas permiten la reutilización y parametrización de modelos \cite{Vanwormhoudt2020}. Existen dos tipos:
+
+\begin{table}[H]
+	\centering
+	\caption{Tipos de plantilla}
+	\label{tab:plantilla-tipos}
+	\begin{tabular}{|l|p{8cm}|}
+		\hline
+		\textbf{Tipo} & \textbf{Descripción} \\
+		\hline
+		Plantillas de modelo & Modelos parametrizados que capturan patrones estructurales \\
+		\hline
+		Plantillas de transformación (M2T) & Fragmentos de texto parametrizados para generar código \\
+		\hline
+	\end{tabular}
+\end{table}
+
+Las plantillas M2T combinan: (1) texto fijo, (2) instrucciones de control, y (3) referencias al modelo \cite{He2024}.
+
+\begin{table}[H]
+	\centering
+	\caption{Lenguajes de plantillas por herramienta}
+	\label{tab:plantillas-herramientas}
+	\begin{tabular}{|l|l|}
+		\hline
+		\textbf{Herramienta} & \textbf{Lenguaje de plantillas} \\
+		\hline
+		StarUML & EJS \\
+		\hline
+		Eclipse/Acceleo & MOFM2T \\
+		\hline
+		Enterprise Architect & Plantillas propietarias \\
+		\hline
+		Visual Paradigm & Template Editor \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\subsection{Forward, Reverse y Round-Trip Engineering}
+
+\begin{table}[H]
+	\centering
+	\caption{Conceptos de ingeniería directa, inversa y de ida y vuelta}
+	\label{tab:forward-reverse-rte}
+	\begin{tabular}{|l|p{9cm}|}
+		\hline
+		\textbf{Concepto} & \textbf{Descripción} \\
+		\hline
+		Forward Engineering & Generación de código a partir del modelo \\
+		\hline
+		Reverse Engineering & Creación de modelo a partir del código existente \\
+		\hline
+		Round-Trip Engineering (RTE) & Sincronización bidireccional entre modelo y código \\
+		\hline
+	\end{tabular}
+\end{table}
+
+El RTE requiere: (1) preservación de información, (2) sincronización bidireccional, y (3) mecanismos de actualización (instantánea o bajo demanda). Existen bloques protegidos para preservar código escrito a mano durante la regeneración \cite{Rosca2021, Almutairi2022}.
+
+\subsection{Diagramas UML Admisibles como Origen}
+
+\begin{table}[H]
+	\centering
+	\caption{Diagramas UML admisibles como origen de generación}
+	\label{tab:diagramas-admisibles}
+	\begin{tabular}{|l|l|p{6cm}|}
+		\hline
+		\textbf{Diagrama} & \textbf{Obligación} & \textbf{Uso} \\
+		\hline
+		Clases & Obligatorio & Base para generación estructural \cite{Rosca2021, Kim2024}. \\
+		\hline
+		Estados & Recomendado & Máquinas de estados (patrón State) \cite{Rosca2021, Kim2024}. \\
+		\hline
+		Secuencia & Recomendado & Interacciones entre objetos \cite{Rosca2021, Kim2024}. \\
+		\hline
+		Actividades & Recomendado & Flujos de trabajo y lógica de negocio \cite{Rosca2021, Kim2024}. \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\subsection{Estado del Arte}
+
+\textbf{Adopción industrial}
+
+Los principales desafíos en MDE son: escalabilidad, interoperabilidad, integración con metodologías ágiles y evolución de lenguajes. El 80\% de los enfoques se aplican a ejemplos académicos, no industriales \cite{Bucchiarone2020}.
+
+\textbf{Integración con IA y Machine Learning}
+
+\begin{table}[H]
+	\centering
+	\caption{Técnicas de IA aplicadas a MDE}
+	\label{tab:ia-tecnicas}
+	\begin{tabular}{|l|p{8cm}|}
+		\hline
+		\textbf{Técnica} & \textbf{Aplicación} \\
+		\hline
+		NLP & Automatización del análisis de requisitos \cite{Zammel2025}. \\
+		\hline
+		ML & Generación de modelos y clasificación \cite{Zammel2025}. \\
+		\hline
+		LLM & Asistencia en desarrollo de transformaciones \cite{Zammel2025}. \\
+		\hline
+	\end{tabular}
+\end{table}
+
+ModelSet contiene 5,466 metamodelos Ecore y 5,120 modelos UML para entrenar modelos de ML \cite{Zammel2025}.
+
+\textbf{Desafíos en Transformaciones}
+
+\begin{table}[H]
+	\centering
+	\caption{Desafíos identificados en las transformaciones de modelos}
+	\label{tab:desafios-transformaciones}
+	\begin{tabular}{|l|p{8cm}|}
+		\hline
+		\textbf{Desafío} & \textbf{Descripción} \\
+		\hline
+		Complejidad & Manejo de colecciones, recursión y condiciones \cite{Lopez2022}. \\
+		\hline
+		Detección de errores & Falta de técnicas automáticas \cite{Lopez2022}. \\
+		\hline
+		Oráculos de prueba & Dificultad para determinar resultados esperados \cite{Lopez2022}. \\
+		\hline
+		Debugging & Limitado soporte para depuración paso a paso \cite{Lopez2022}. \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\textbf{Herramientas}
+
+StarUML: CLI para generación automatizada con EJS \cite{Marcen2024}.
+
+Enterprise Architect: Plantillas personalizables \cite{Marcen2024}.
+
+Visual Paradigm: Round-trip engineering \cite{Marcen2024}.
+
+Eclipse Papyrus + Acceleo: Estándares OMG \cite{Marcen2024}.
 
 \section{Justificación de la selección de StarUML}
 
 \subsection{Herramienta seleccionada y versión}
-% Contenido a completar.
+Para el desarrollo del ciclo Model-Driven Development (MDD) del PFC MundiPets, el equipo seleccionó StarUML (MKLabs, versión 7.1.0), herramienta CASE que implementa el paradigma de Model-Driven Architecture (MDA) para transformar modelos en código de forma sistemática \cite{Chitforoush2007, Korongo2022}. StarUML figura explícitamente entre las herramientas admisibles según la guía de la actividad, que exige la entrega del proyecto nativo \texttt{.mdj} junto con los archivos de configuración de la extensión de generación utilizada.
 
 \subsection{Justificación frente a los requisitos del PFC}
-% Contenido a completar.
+La selección de StarUML se sustenta en la correspondencia entre sus capacidades técnicas y los requisitos tecnológicos definidos para MundiPets:
+\begin{itemize}[itemsep=2pt, topsep=2pt]
+	\item \textbf{Lenguaje objetivo y framework.} Para el módulo de Gestión de Solicitud de Adopción, StarUML dispone de la extensión \textit{C\# Code Generation and Reverse Engineering}, que transforma directamente las clases, atributos y operaciones del diagrama UML en clases C\#, sin requerir configuración adicional de plantillas. La literatura advierte que la fidelidad de este tipo de generadores frente a la semántica completa del modelo suele ser limitada \cite{Sejans2011}, por lo que se complementa con revisión manual (Secciones 6 y 8).
+	
+	\item \textbf{Escala del subsistema.} El módulo de Gestión de Solicitud de Adopción se modeló con 8 clases, superando el mínimo de 6 exigido. StarUML ofrece un editor de clases con atributos tipados, operaciones, visibilidad, cardinalidad y estereotipos --criterios estándar de comparación de herramientas CASE UML \cite{Khaled2009}--, suficiente para esta escala sin la complejidad de herramientas empresariales.
+	
+	\item \textbf{Estereotipos y perfiles.} Se aplicó el estereotipo \texttt{\textless\textless{}Entity\textgreater\textgreater{}} del \textit{UML Standard Profile} de StarUML a las clases del dominio, como marca de clasificación semántica dentro del modelo. Sin embargo, la revisión del código generado (Sección 8) confirmó que la extensión \textit{C\# Code Generation and Reverse Engineering} no traduce este estereotipo a ninguna construcción del lenguaje C\# no genera atributos, comentarios ni marcas equivalentes, por lo que su función es exclusivamente documental sobre el modelo UML y no forma parte del mecanismo de generación de código evaluado en este trabajo.
+	
+	\item \textbf{Licencia y curva de aprendizaje.} StarUML tiene licencia de evaluación gratuita e interfaz de alcance moderado. La simplicidad de configuración y el costo de licenciamiento son criterios determinantes en la selección de herramientas académicas \cite{Khaled2009}.
+\end{itemize}
 
-\subsection{Comparación con la alternativa descartada}
-% Contenido a completar.
+\subsection{Comparación con alternativa descartada}
+Como alternativa se evaluó y descartó Visual Paradigm, herramienta igualmente admisible según la guía de la actividad, cuyo soporte para la generación de mapeos ORM es relativamente más maduro que el de otras herramientas comparadas \cite{Sejans2011}, aunque con limitaciones de fidelidad semántica similares al resto de generadores analizados.
+\begin{table}[H]
+	\centering
+	\caption{StarUML vs. Visual Paradigm}
+	\label{tab:staruml_vp}
+	\begin{tabular}{|l|p{5cm}|p{5cm}|}
+		\hline
+		\textbf{Criterio} & \textbf{StarUML (seleccionada)} & \textbf{Visual Paradigm (descartada)} \\
+		\hline
+		Lenguajes objetivo típicos & Java, C\#, C++, TypeScript, Python & Java, C\#, C++, Python, VB, ActionScript \\
+		\hline
+		Generación de código & Generadores oficiales por extensión; la extensión de C\# utilizada emplea una plantilla fija embebida en el complemento, no configurable desde la interfaz (Sección 6.1) & Instant Generator robusto con plantillas ORM/JPA/Hibernate preconfiguradas \\
+		\hline
+		Evidencia exigida por la guía & Proyecto \texttt{.mdj} + archivos de configuración de la extensión & Proyecto \texttt{.vpp} + evidencias de la corrida \\
+		\hline
+		Adecuación al alcance del módulo (8 clases de dominio) & Suficiente; interfaz simplificada sin sobrecarga de configuración & Mayor capacidad, pero orientada a proyectos de mayor escala empresarial, con configuración más compleja de lo requerido \\
+		\hline
+		Curva de aprendizaje & Menor; el equipo reportó facilidad de uso durante la práctica & Mayor complejidad funcional \\
+		\hline
+		Licencia & Evaluación gratuita disponible & Licencia comercial; versión de comunidad con funcionalidades limitadas \\
+		\hline
+	\end{tabular}
+\end{table}
+
+Si bien Visual Paradigm ofrece plantillas ORM/JPA/Hibernate preconfiguradas \cite{Sejans2011}, el equipo priorizó StarUML por su menor complejidad de configuración para el alcance del módulo (8 clases) y por la simplicidad de invocar el generador directamente desde la interfaz sin necesidad de definir mapeos adicionales \cite{Syriani2018}, evitando funcionalidades de Visual Paradigm orientadas a proyectos de mayor escala no aprovechables en este PFC.
 
 \section{Descripción del subsistema del PFC modelado}
-
 \subsection{Contexto de MundiPets}
-% Contenido a completar.
-
+MundiPets es una plataforma orientada a centralizar la información de mascotas y a facilitar los procesos de adopción y cruza responsable, conectando de forma organizada, transparente y segura a propietarios, adoptantes, interesados en cruza, refugios y veterinarias. El sistema incorpora componentes de apoyo basados en inteligencia artificial evaluación preliminar de compatibilidad, validación de imágenes y moderación de contenido sin reemplazar la evaluación profesional veterinaria ni las decisiones definitivas sobre la salud o reproducción de las mascotas. El acceso a la plataforma se gestiona mediante roles diferenciados, y la información sensible de propietarios y mascotas se visualiza únicamente conforme a los permisos definidos para cada tipo de usuario.
 \subsection{Módulo seleccionado}
-% Contenido a completar.
+El módulo seleccionado es Gestión de Solicitud de Adopción (RF-05 de la ERS de MundiPets), central en el flujo de negocio al articular la interacción entre adoptante y propietario/refugio desde la postulación hasta la resolución de la solicitud.
+La entidad \textit{SolicitudAdopcion} tiene un ciclo de vida definido: se genera en estado \textit{Pendiente} al enviarse sobre una mascota disponible; pasa opcionalmente a \textit{En revisión} mientras se evalúan las condiciones del solicitante; y se resuelve como \textit{Aceptada}, \textit{Rechazada} o \textit{Cancelada}. Esta trazabilidad de estados sustenta el diagrama de clases (Sección 5) y el diagrama de casos de uso del módulo (Sección 5.4).
 
 \subsection{Actores}
-% Contenido a completar.
+
+La Tabla~\ref{tab:actores-modulo} presenta los actores que interactúan directamente con el módulo de Gestión de Solicitud de Adopción, describiendo su rol específico dentro del flujo del proceso.
+
+\begin{table}[h!]
+	\centering
+	\caption{Actores del módulo de Gestión de Solicitud de Adopción}
+	\label{tab:actores-modulo}
+	\begin{tabular}{|p{3cm}|p{10cm}|}
+		\hline
+		\textbf{Actor} & \textbf{Rol en el módulo} \\
+		\hline
+		Adoptante & Consulta la publicación de una mascota disponible, envía la solicitud de adopción ingresando su justificación y las condiciones de su hogar, y recibe la notificación de la decisión tomada. \\
+		\hline
+		Propietario o refugio & Recibe la solicitud, revisa la información autorizada del adoptante y decide sobre su aceptación, rechazo o cancelación. \\
+		\hline
+	\end{tabular}
+\end{table}
 
 \subsection{Requisitos funcionales}
-% Contenido a completar.
+
+La Tabla~\ref{tab:rf05} presenta la especificación completa del requisito funcional central del módulo (RF-05), siguiendo el formato de atributos utilizado en el ERS de MundiPets.
+
+\begin{table}[h!]
+	\centering
+	\caption{RF-05 --- Gestionar solicitudes de adopción}
+	\label{tab:rf05}
+	\begin{tabular}{|p{3.5cm}|p{9.5cm}|}
+		\hline
+		\textbf{Atributo} & \textbf{Valor} \\
+		\hline
+		Identificador & RF-05 \\
+		\hline
+		Descripción & El sistema deberá permitir que un usuario interesado envíe solicitudes de adopción y que el propietario pueda aceptarlas o rechazarlas después de revisar la información del solicitante. \\
+		\hline
+		Actores & Adoptante, Propietario de mascota (o refugio) \\
+		\hline
+		Entradas & Solicitud de adopción, información del solicitante (justificación, condiciones del hogar) \\
+		\hline
+		Salidas & Solicitud registrada y estado de aceptación o rechazo \\
+		\hline
+		Precondiciones & La mascota debe estar disponible para adopción; el adoptante debe estar autenticado y no poseer una solicitud activa sobre la misma publicación \\
+		\hline
+		Postcondiciones & La solicitud queda registrada con su estado correspondiente \\
+		\hline
+		Prioridad (MoSCoW) & Must \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\textit{Nota: el identificador RF-05 corresponde a la numeración original definida en el documento ERS/SRS parcial de MundiPets, por lo que se mantiene sin modificación para preservar la trazabilidad con la documentación de requisitos del proyecto.}
+
+\vspace{0.3cm}
+
+La Tabla~\ref{tab:rf-complementarios} resume los requisitos funcionales complementarios que interactúan con el módulo de Gestión de Solicitud de Adopción sin constituir su núcleo funcional.
+
+\begin{table}[h!]
+	\centering
+	\caption{Requisitos funcionales complementarios del módulo}
+	\label{tab:rf-complementarios}
+	\begin{tabular}{|p{1.5cm}|p{3.5cm}|p{1.7cm}|p{6.5cm}|}
+		\hline
+		\textbf{ID} & \textbf{Nombre} & \textbf{Prioridad} & \textbf{Vínculo con el módulo} \\
+		\hline
+		RF-07 & Sistema de mensajería entre usuarios & Could & Permite la comunicación entre el adoptante y el propietario o refugio mientras la solicitud de adopción permanece activa. \\
+		\hline
+		RF-15 & Consultar el historial de procesos de adopción y cruza & Could & Permite al propietario consultar el historial de solicitudes asociadas a sus mascotas, incluyendo estado y fecha de resolución. \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\textit{Nota: los identificadores RF-07 y RF-15 corresponden igualmente a la numeración original del ERS/SRS parcial de MundiPets.}
 
 \section{Modelo UML de origen}
 
 \subsection{Diagrama de clases}
-% Contenido a completar.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{figuras/DiagramadeClases-GestionSolicitudAdopcion.png}
+	\caption{Diagrama de Clases del Módulo Gestión de Solicitud de Adopción ``MundiPets''}
+	\label{fig:diagrama-clases}
+\end{figure}
+
+La Figura~\ref{fig:diagrama-clases} presenta el diagrama de clases del módulo de Gestión de Solicitud de Adopción, compuesto por ocho clases del dominio (\texttt{csUsuario}, \texttt{csRol}, \texttt{csUsuarioRol}, \texttt{csMascota}, \texttt{csHistorialMedico}, \texttt{csPublicacion}, \texttt{csDocumentoVeterinario}, \texttt{csSolicitudAdopcion}), estereotipadas como \texttt{\textless\textless{}Entity\textgreater\textgreater{}}. El archivo nativo del modelo se encuentra en \texttt{Modelo/DiagramadeClases-GestionSolicitudAdopcion.mdj} dentro del repositorio del equipo.
 
 \subsection{Relaciones UML}
-% Contenido a completar.
+
+\begin{table}[H]
+	\centering
+	\caption{Relaciones UML del módulo}
+	\label{tab:relaciones-uml}
+	\begin{tabular}{|c|l|c|c|l|}
+		\hline
+		\textbf{\#} & \textbf{Relación} & \textbf{Cardinalidad} & \textbf{Etiqueta} & \textbf{Tipo} \\
+		\hline
+		1 & Usuario $\rightarrow$ Mascota              & 1 $\rightarrow$ 0..* & registra & Asociación \\
+		\hline
+		2 & Usuario $\rightarrow$ UsuarioRol            & 1 $\rightarrow$ 1..* & obtiene  & Composición \\
+		\hline
+		3 & Rol $\rightarrow$ UsuarioRol                & 1 $\rightarrow$ 0..* & habilita & Composición \\
+		\hline
+		4 & Mascota $\rightarrow$ HistorialMedico       & 1 $\rightarrow$ 0..1 & posee    & Composición \\
+		\hline
+		5 & Mascota $\rightarrow$ Publicacion           & 1 $\rightarrow$ 0..* & expone   & Agregación \\
+		\hline
+		6 & Mascota $\rightarrow$ DocumentoVeterinario  & 1 $\rightarrow$ 0..* & respalda & Composición \\
+		\hline
+		7 & Publicacion $\rightarrow$ SolicitudAdopcion & 1 $\rightarrow$ 0..* & genera   & Asociación \\
+		\hline
+		8 & Usuario $\rightarrow$ SolicitudAdopcion     & 1 $\rightarrow$ 0..* & solicita & Asociación \\
+		\hline
+		9 & Usuario $\rightarrow$ DocumentoVeterinario  & 0..* $\rightarrow$ 0..1 & revisa & Asociación \\
+		\hline
+	\end{tabular}
+\end{table}
+
+Las composiciones reflejan clases cuya existencia depende de su contenedora (\textit{UsuarioRol}, \textit{HistorialMedico}, \textit{DocumentoVeterinario}); la agregación Mascota--Publicacion refleja que la publicación conserva su propio ciclo de vida; el resto son asociaciones simples.
 
 \subsection{Estereotipos}
-% Contenido a completar.
 
-\subsection{Diagramas complementarios, si aplica}
-% Contenido a completar.
+\begin{table}[H]
+	\centering
+	\caption{Estereotipo aplicado y su efecto en el código generado}
+	\label{tab:estereotipos}
+	\begin{tabular}{|l|l|l|}
+		\hline
+		\textbf{Estereotipo} & \textbf{Clases} & \textbf{Efecto en el código C\# generado} \\
+		\hline
+		\texttt{\textless\textless{}Entity\textgreater\textgreater{}} & Las 8 clases del dominio & Ninguno --el generador no lo traduce-- \\
+		\hline
+	\end{tabular}
+\end{table}
+El estereotipo \texttt{\textless\textless{}Entity\textgreater\textgreater{}} del \textit{UML Standard Profile} se aplicó a las 8 clases del dominio como clasificación semántica dentro del modelo UML. La revisión del código generado (Sección 8) confirmó que la extensión \textit{C\# Code Generation and Reverse Engineering} no lo traduce a ninguna anotación, atributo o comentario en C\#; su función es exclusivamente documental sobre el modelo y no interviene en el mecanismo de generación evaluado en este trabajo.
+
+\subsection{Diagramas complementarios}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{figuras/DiagramaCasodeUso-GestionSolicitudAdopcion.png}
+	\caption{Diagrama Caso de Uso del Módulo Gestión de Solicitud de Adopción ``MundiPets''}
+	\label{fig:diagrama-casos-uso}
+\end{figure}
+
+La Figura~\ref{fig:diagrama-casos-uso} presenta el diagrama de casos de uso del módulo de Gestión de Solicitud de Adopción, elaborado a partir del requisito funcional RF-05 y los actores identificados en la Sección 4.3. El adoptante consulta la publicación de una mascota disponible, envía la solicitud de adopción y recibe la notificación del resultado, pudiendo cancelarla mientras permanezca activa. El propietario o refugio revisa la solicitud recibida y decide entre aceptarla o rechazarla, ambos casos modelados como extensiones del caso de uso ``Revisar solicitud''. Este diagrama complementa la vista estructural del diagrama de clases (Figura~\ref{fig:diagrama-clases}), aportando el contexto de interacción entre los actores y el sistema.
 
 \subsection{Validación del modelo en StarUML}
-% Contenido a completar.
 
-\section{Configuración del generador}
+La validación en StarUML es asíncrona: se ejecuta automáticamente cada vez que el modelo se guarda. Tras guardar el modelo final del módulo de Gestión de Solicitud de Adopción, el panel de resultados de StarUML confirmó ``Validation Results --- No errors'', sin advertencias sobre clases, atributos o relaciones, verificando la consistencia estructural del modelo previo a la generación de código (Figura~\ref{fig:validacion-staruml}).
 
-\subsection{Plantilla y parámetros}
-% Contenido a completar.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{figuras/Captura - Resultado de la validación del modelo en StarUML — sin errores.png}
+	\caption{Resultado de la validación del modelo en StarUML --- sin errores}
+	\label{fig:validacion-staruml}
+\end{figure}
 
-\subsection{Política de regeneración y decisiones de mapeo}
-% Contenido a completar.
+\section{Configuración del Generador}
+
+\subsection{Plantilla y Parámetros}
+
+La herramienta seleccionada es StarUML, con el complemento C\# Code Generation and Reverse Engineering, invocado desde la interfaz gráfica mediante Tools $\rightarrow$ C\# $\rightarrow$ Generate Code (detalle de ejecución en la Sección 7). A diferencia de motores de plantillas editables (EJS, Velocity), la transformación está codificada de forma fija dentro del complemento (módulo \texttt{code-generator.js}), por lo que se clasifica como plantilla estándar, no personalizable desde la interfaz.
+
+\begin{table}[h]
+	\centering
+	\caption{Parámetros de configuración utilizados.}
+	\label{tab:parametros_config}
+	\begin{tabular}{|p{4.5cm}|p{8cm}|}
+		\hline
+		\textbf{Parámetro} & \textbf{Valor para MundiPets} \\
+		\hline
+		Herramienta / complemento & StarUML + C\# Code Generation and Reverse Engineering \\
+		\hline
+		Elemento de origen & Model (8 clases del subsistema de gestión de solicitudes de adopción) \\
+		\hline
+		Lenguaje objetivo & C\# \\
+		\hline
+		Tipo de plantilla & Estándar, fija en el código del complemento (no editable) \\
+		\hline
+		Ruta de salida --- versión inicial & \texttt{C:\textbackslash Generado\textbackslash MundiPets\textbackslash VersionInicial} \\
+		\hline
+		Ruta de salida --- versión round-trip & \texttt{C:\textbackslash Generado\textbackslash MundiPets\textbackslash VersionRoundtrip} (Sección 9) \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\subsection{Política de Regeneración y Decisiones de Mapeo}
+
+\textbf{Política de regeneración.} El complemento no ofrece regeneración selectiva ni bloques protegidos: cada ejecución regenera por completo el elemento del modelo seleccionado. Como estrategia propia, el equipo dirigió cada ejecución a una carpeta distinta (\textit{VersionInicial} / \textit{VersionRoundtrip}) para conservar evidencia de ambas versiones.
+
+\textbf{Comportamiento de tipos.} El complemento no traduce nombres de tipo: si el atributo no está enlazado a un tipo de dato del modelo, copia literalmente el texto ingresado. Esto se confirmó en el código fuente del complemento (función \texttt{getType()} de \texttt{code-generator.js}) y coincide con los errores observados al compilar (Sección 8): \textit{boolean}, \textit{date} y \textit{Date} se generaron tal cual y no son válidos en C\#, por lo que se corrigieron manualmente a \textit{bool} y \textit{DateTime} en la copia de verificación.
+
+\textbf{Asociaciones.} El diagrama de clases define una asociación real entre \textit{csUsuario} y \textit{csMascota} con multiplicidad 1 a muchos (un usuario puede tener varias mascotas). Sin embargo, la revisión del archivo generado \textit{csMascota.cs} muestra que esa asociación no se tradujo mediante el mecanismo de colecciones del generador (bloque \textit{"(from associations)"} de \texttt{writeClass()}, que produce campos \texttt{List<Tipo>}/\texttt{HashSet<Tipo>}): en su lugar, la clase contiene el campo suelto \textit{idPropietario: int}, equivalente a una llave foránea manual. Esto indica que, aunque la asociación existe en el diagrama, no quedó configurada como navegable desde el extremo correspondiente, por lo que el generador la trató como un atributo simple en vez de como relación de objetos. Se trata de una limitación de configuración del modelo, no del generador: el mecanismo existe (Tabla~\ref{tab:mapeo_estructural}) pero no se activó para este caso.
+
+\begin{table}[H]
+	\centering
+	\caption{Decisiones de mapeo estructural.}
+	\label{tab:mapeo_estructural}
+	\begin{tabular}{|p{3.3cm}|p{4.3cm}|p{4.8cm}|}
+		\hline
+		\textbf{Elemento UML} & \textbf{Salida en C\#} & \textbf{Observación} \\
+		\hline
+		Clase & class / abstract class & 1 a 1 (ver Sección 7, trazabilidad) \\
+		\hline
+		Atributo & Campo con el mismo nombre y tipo tal cual fue escrito en el modelo & El tipo no se traduce automáticamente \\
+		\hline
+		Operación & Método con el mismo nombre y tipo de retorno declarado & Solo la firma; sin lógica de negocio (Sección 8) \\
+		\hline
+		Asociación navegable (mult. 1..*/0..*/*) & Campo \texttt{List<Tipo>} u \texttt{HashSet<Tipo>} en la clase de origen & Requiere que la asociación esté marcada como navegable en el modelo \\
+		\hline
+		Asociación csUsuario--csMascota (caso observado) & Campo suelto \texttt{idPropietario: int} en \texttt{csMascota} (sin \texttt{List<>}) & La asociación existe en el diagrama pero no se generó como colección; ver detalle abajo \\
+		\hline
+	\end{tabular}
+\end{table}
 
 \section{Proceso de generación}
 
 \subsection{Ejecución y capturas}
-% Contenido a completar.
+
+Para realizar la generación automática de código se abrió en StarUML el archivo nativo \texttt{DiagramadeClases-\allowbreak GestionSolicitudAdopcion.mdj}, correspondiente al subsistema de gestión de solicitudes de adopción de MundiPets. El modelo utilizado contiene ocho clases del dominio: csUsuario, csMascota, csUsuarioRol, csRol, csHistorialMedico, csPublicacion, csDocumentoVeterinario y csSolicitudAdopcion.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{figuras/Captura_-_Invocacion_del_generador_de_codigo_C_desde_StarUML.png}
+	\caption{Invocación del generador de código C\# desde StarUML.}
+	\label{fig:invocacion_generador}
+\end{figure}
+
+La generación se ejecutó mediante la extensión C\# Code Generation and Reverse Engineering, utilizando la ruta de menú Tools, C\#, Generate Code. Como elemento base se seleccionó el modelo Model, que contiene las clases y relaciones del diagrama UML. La carpeta de salida configurada fue VersionInicial, ubicada en \texttt{C:\textbackslash Generado\textbackslash MundiPets}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{figuras/Captura_-_Seleccion_del_modelo_base_para_la_generacion_de_codigo.png}
+	\caption{Selección del modelo base para la generación de código.}
+	\label{fig:seleccion_modelo}
+\end{figure}
+
+La extensión no presentó un panel de log detallado durante la ejecución. La finalización del proceso se verificó mediante la creación de los archivos C\# en la carpeta de salida y la ausencia de mensajes de error.
+
+El proceso inició aproximadamente a las 18:06 y tuvo una duración de 3 segundos, medida manualmente desde la confirmación de la generación hasta la creación de los archivos en la carpeta de salida.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{figuras/Captura_-_Archivos_C_generados_a_partir_del_modelo_UML_de_MundiPets.png}
+	\caption{Archivos C\# generados a partir del modelo UML de MundiPets.}
+	\label{fig:archivos_generados}
+\end{figure}
+
+La Figura \ref{fig:archivos_generados} evidencia la creación automática de ocho archivos con extensión .cs. Cada archivo corresponde a una clase incluida en el modelo UML seleccionado, confirmando que la extensión completó el proceso de generación sin presentar mensajes de error.
 
 \subsection{Árbol del proyecto y trazabilidad clase-archivo}
-% Contenido a completar.
+
+La estructura obtenida después de ejecutar el generador conserva una correspondencia directa entre las clases del modelo UML y los archivos de código fuente. Cada clase incluida dentro del modelo seleccionado produjo un archivo independiente con extensión .cs, manteniendo el nombre definido en StarUML.
+
+El código generado se almacenó en la carpeta \texttt{C:\textbackslash Generado\textbackslash MundiPets\textbackslash VersionInicial}. El árbol resultante está compuesto por ocho archivos correspondientes a las ocho clases del subsistema de gestión de solicitudes de adopción.
+
+\begin{verbatim}
+	Árbol del proyecto
+	
+	VersionInicial\Model
+	csDocumentoVeterinario.cs
+	csHistorialMedico.cs
+	csMascota.cs
+	csPublicacion.cs
+	csRol.cs
+	csSolicitudAdopcion.cs
+	csUsuario.cs
+	csUsuarioRol.cs
+\end{verbatim}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{figuras/Captura_-_Arbol_de_archivos_generado_a_partir_de_las_clases_UML_del_subsistema.png}
+	\caption{Árbol de archivos generado a partir de las clases UML del subsistema.}
+	\label{fig:arbol_archivos}
+\end{figure}
+
+En la Figura \ref{fig:arbol_archivos} se observa que el generador creó un archivo de código fuente por cada clase UML del modelo. Esta organización facilita la identificación de los artefactos producidos y permite comprobar la trazabilidad desde el modelo hasta el código.
+
+\begin{table}[H]
+	\centering
+	\caption{Correspondencia entre clases UML y archivos C\# generados.}
+	\label{tab:correspondencia_clases}
+	\begin{tabular}{|p{3.5cm}|p{3.5cm}|p{6cm}|}
+		\hline
+		\textbf{Clase del modelo UML} & \textbf{Archivo C\# generado} & \textbf{Correspondencia} \\
+		\hline
+		csUsuario & csUsuario.cs & La clase UML produjo un archivo con el mismo nombre. \\
+		\hline
+		csMascota & csMascota.cs & Contiene los atributos y operaciones estructurales de la mascota. \\
+		\hline
+		csUsuarioRol & csUsuarioRol.cs & Representa la asignación de roles a los usuarios. \\
+		\hline
+		csRol & csRol.cs & Contiene la estructura correspondiente a los roles del sistema. \\
+		\hline
+		csHistorialMedico & csHistorialMedico.cs & Representa la información médica asociada a la mascota. \\
+		\hline
+		csPublicacion & csPublicacion.cs & Contiene la estructura de las publicaciones de mascotas. \\
+		\hline
+		csDocumentoVeterinario & csDocumentoVeterinario.cs & Representa los documentos veterinarios registrados. \\
+		\hline
+		csSolicitudAdopcion & csSolicitudAdopcion.cs & Contiene la estructura y operaciones de las solicitudes de adopción. \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{figuras/Captura_-_Trazabilidad_entre_las_clases_del_modelo_UML_y_los_archivos_C_generados.png}
+	\caption{Trazabilidad entre las clases del modelo UML y los archivos C\# generados.}
+	\label{fig:trazabilidad}
+\end{figure}
+
+La Figura \ref{fig:trazabilidad} permite comparar visualmente las ocho clases presentes en el modelo UML con los ocho archivos obtenidos. La coincidencia en nombres y cantidad evidencia la transformación modelo a texto realizada por la extensión de StarUML.
+
 
 \section{Verificación del código generado}
 
 \subsection{Compilación y ejecución}
-% Contenido a completar.
+
+Para verificar la validez sintáctica del código generado por StarUML, los archivos C\# se incorporaron en un proyecto de consola creado con el SDK de .NET, compilado desde la terminal integrada de Visual Studio Code mediante \texttt{dotnet build}. La primera compilación produjo nueve errores, originados porque el generador conservó literalmente los tipos \texttt{boolean}, \texttt{date} y \texttt{Date} del modelo UML, no válidos en C\# (afectando a \texttt{csUsuario.cs}, \texttt{csUsuarioRol.cs}, \texttt{csPublicacion.cs}, \texttt{csDocumentoVeterinario.cs}, \texttt{csSolicitudAdopcion.cs} y \texttt{csHistorialMedico.cs}). Estos se corrigieron manualmente en la copia de verificación como \texttt{bool} y \texttt{DateTime}, conservando sin cambios los archivos originales generados por StarUML.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{figuras/cap_primera_compilacion_errores.png}
+	\caption{Primera compilación del código generado, con errores de incompatibilidad de tipos.}
+	\label{fig:primera-compilacion}
+\end{figure}
+
+Tras corregir los tipos, la segunda compilación redujo los errores a tres, originados por los métodos \texttt{void} \texttt{asignar()} y \texttt{revocar()} (\texttt{csUsuarioRol}) y \texttt{actualizarPerfil()} (\texttt{csUsuario}), que contenían una instrucción \texttt{return} con expresión pese a no retornar valores; se eliminó dicha expresión.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{figuras/cap_segunda_compilacion_tipos_corregidos.png}
+	\caption{Segunda compilación después de adaptar los tipos UML al lenguaje C\#.}
+	\label{fig:segunda-compilacion}
+\end{figure}
+
+Después de corregir los tipos y los retornos incorrectos, \texttt{dotnet build} finalizó con cero errores y treinta y dos advertencias, produciendo el ensamblado \texttt{VerificacionMundiPets.dll}. Las advertencias corresponden al código \texttt{CS8618}, relacionado con campos de tipo referencia no inicializados en los constructores generados; no impidieron la compilación ni la producción del ensamblado, pero evidencian que el generador crea principalmente la estructura de las clases sin configurar completamente las reglas modernas de nulabilidad de C\#.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{figuras/cap_compilacion_exitosa.png}
+	\caption{Compilación exitosa del código generado después de aplicar correcciones de compatibilidad.}
+	\label{fig:compilacion-exitosa}
+\end{figure}
+
+Con el proyecto compilado, se ejecutó una prueba mínima (\texttt{dotnet run}) mediante un archivo \texttt{Program.cs} creado manualmente y mantenido separado de los archivos generados. La prueba cargó por reflexión la clase \texttt{csSolicitudAdopcion}, reconociendo sus 8 campos (\texttt{idSolicitudAdopcion}, \texttt{idPublicacion}, \texttt{idAdoptante}, \texttt{justificacion}, \texttt{condicionesHogar}, \texttt{estado}, \texttt{fechaSolicitud}, \texttt{fechaRespuesta}) y sus 5 métodos (\texttt{enviarSolicitud}, \texttt{revisar}, \texttt{aceptar}, \texttt{rechazar}, \texttt{cancelar}). Al ser una clase abstracta no se instanció directamente, pero la carga del tipo confirmó su correcta incorporación al ensamblado.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{figuras/cap_ejecucion_prueba_solicitudadopcion.png}
+	\caption{Ejecución de una prueba estructural sobre la clase csSolicitudAdopcion.}
+	\label{fig:ejecucion-prueba}
+\end{figure}
+
+\begin{table}[H]
+	\centering
+	\caption{Resultados de la compilación y ejecución del código generado.}
+	\label{tab:resultados-compilacion}
+	\begin{tabular}{|l|l|l|}
+		\hline
+		\textbf{Prueba} & \textbf{Resultado real} & \textbf{Evidencia} \\
+		\hline
+		Primera compilación & 9 errores de tipos incompatibles & Figura~\ref{fig:primera-compilacion} \\
+		\hline
+		Segunda compilación & 3 errores y 32 advertencias & Figura~\ref{fig:segunda-compilacion} \\
+		\hline
+		Compilación final & 0 errores y 32 advertencias & Figura~\ref{fig:compilacion-exitosa} \\
+		\hline
+		Ejecución mínima & Clase cargada; 8 campos y 5 métodos reconocidos & Figura~\ref{fig:ejecucion-prueba} \\
+		\hline
+	\end{tabular}
+\end{table}
 
 \subsection{Correspondencia modelo-código}
-% Contenido a completar.
+
+Para comprobar la trazabilidad detallada entre el modelo y el código, se comparó la clase \texttt{csSolicitudAdopcion} definida en StarUML con el archivo \texttt{csSolicitudAdopcion.cs} producido por el generador, considerando el nombre de la clase, sus atributos, los tipos de datos y las operaciones transformadas en métodos. Los atributos \texttt{idSolicitudAdopcion}, \texttt{idPublicacion}, \texttt{idAdoptante}, \texttt{justificacion}, \texttt{condicionesHogar} y \texttt{estado} conservaron sus nombres y tipos estructurales; \texttt{fechaSolicitud} y \texttt{fechaRespuesta}, originalmente \texttt{date}, se adaptaron manualmente a \texttt{DateTime}. Las operaciones \texttt{enviarSolicitud()}, \texttt{revisar()}, \texttt{aceptar()}, \texttt{rechazar()} y \texttt{cancelar()} se generaron como métodos abstractos \texttt{void}, únicamente con su firma, sin la lógica de negocio correspondiente (Tabla~\ref{tab:correspondencia-modelo-codigo}).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{figuras/cap_correspondencia_uml_csharp.png}
+	\caption{Correspondencia entre la clase UML csSolicitudAdopcion y el archivo C\# generado.}
+	\label{fig:correspondencia-uml-cs}
+\end{figure}
+
+\begin{table}[H]
+	\centering
+	\caption{Correspondencia entre la clase UML csSolicitudAdopcion y el código generado.}
+	\label{tab:correspondencia-modelo-codigo}
+	\begin{tabular}{|l|l|l|}
+		\hline
+		\textbf{Elemento UML} & \textbf{Código C\# generado} & \textbf{Resultado} \\
+		\hline
+		Clase csSolicitudAdopcion & abstract class csSolicitudAdopcion & Correspondencia directa \\
+		\hline
+		idSolicitudAdopcion: int & int idSolicitudAdopcion & Conservado \\
+		\hline
+		idPublicacion: int & int idPublicacion & Conservado \\
+		\hline
+		idAdoptante: int & int idAdoptante & Conservado \\
+		\hline
+		justificacion: string & string justificacion & Conservado \\
+		\hline
+		condicionesHogar: string & string condicionesHogar & Conservado \\
+		\hline
+		estado: string & string estado & Conservado \\
+		\hline
+		fechaSolicitud: date & DateTime fechaSolicitud & Adaptado manualmente \\
+		\hline
+		fechaRespuesta: date & DateTime fechaRespuesta & Adaptado manualmente \\
+		\hline
+		enviarSolicitud(): void & abstract void enviarSolicitud() & Firma generada \\
+		\hline
+		revisar(): void & abstract void revisar() & Firma generada \\
+		\hline
+		aceptar(): void & abstract void aceptar() & Firma generada \\
+		\hline
+		rechazar(): void & abstract void rechazar() & Firma generada \\
+		\hline
+		cancelar(): void & abstract void cancelar() & Firma generada \\
+		\hline
+	\end{tabular}
+\end{table}
 
 \subsection{Limitaciones detectadas}
-% Contenido a completar.
+
+Durante la compilación y ejecución del código generado se identificaron limitaciones relacionadas con la compatibilidad de tipos, la generación de métodos, la inicialización de campos y la ausencia de lógica de negocio. Estas observaciones permiten distinguir claramente los elementos producidos automáticamente por StarUML de las correcciones y componentes añadidos manualmente para realizar la verificación (Tabla~\ref{tab:limitaciones}).
+
+\begin{table}[H]
+	\centering
+	\caption{Limitaciones identificadas en el código generado por StarUML.}
+	\label{tab:limitaciones}
+	\begin{tabular}{|p{3.2cm}|p{4cm}|p{3.8cm}|p{2.2cm}|}
+		\hline
+		\textbf{Limitación detectada} & \textbf{Evidencia observada} & \textbf{Corrección aplicada} & \textbf{Tipo de intervención} \\
+		\hline
+		Tipos UML incompatibles con C\# & boolean, date y Date produjeron 9 errores CS0246 & boolean$\rightarrow$bool; date/Date$\rightarrow$DateTime & Manual \\
+		\hline
+		Retornos incorrectos en métodos void & asignar(), revocar(), actualizarPerfil() con return + expresión & Se eliminó la expresión de retorno & Manual \\
+		\hline
+		Campos string sin inicializar & 32 advertencias CS8618 en la compilación final & Se documentaron; no impidieron compilar/ejecutar & No corregido \\
+		\hline
+		Generación de clases abstractas & csSolicitudAdopcion generada como clase abstracta & Prueba mediante reflexión, sin instanciación directa & Código de prueba manual \\
+		\hline
+		Métodos sin lógica de negocio & Firmas de enviarSolicitud(), revisar(), aceptar(), rechazar(), cancelar() & Implementación pendiente para el desarrollo del PFC & Pendiente \\
+		\hline
+		Ausencia de persistencia y CRUD completo & Sin conexión a BD, repositorios ni operaciones CRUD & Se desarrollará posteriormente & Pendiente \\
+		\hline
+		Ausencia de validaciones & Sin reglas de estado, campos obligatorios o permisos & Se implementarán manualmente & Pendiente \\
+		\hline
+	\end{tabular}
+\end{table}
+
+La herramienta generó las clases, campos y firmas de los métodos, pero no produjo la lógica de negocio necesaria para gestionar solicitudes de adopción. Tampoco generó interfaces, persistencia, repositorios, validaciones ni operaciones CRUD completas. Por tanto, el resultado constituye una base estructural del sistema y no una aplicación terminada.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{figuras/cap_comparacion_tipo_original_datetime.png}
+	\caption{Comparación entre el código original generado y la corrección manual de tipos.}
+	\label{fig:comparacion-tipos}
+\end{figure}
+
+StarUML generó los campos \texttt{fechaSolicitud} y \texttt{fechaRespuesta} con el tipo \texttt{date}; en la copia de verificación ambos fueron sustituidos manualmente por \texttt{DateTime}, permitiendo que el archivo fuera reconocido por el compilador de C\#.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{figuras/cap_correccion_retornos_void.png}
+	\caption{Corrección manual de expresiones de retorno incompatibles con métodos void.}
+	\label{fig:correccion-retornos}
+\end{figure}
+
+Los métodos \texttt{asignar()} y \texttt{revocar()} fueron generados con la instrucción \texttt{return null}, pese a estar declarados con tipo de retorno \texttt{void}. En la copia de verificación se eliminaron las instrucciones \texttt{return null}, conservando las firmas y el espacio destinado a la implementación posterior de la lógica de negocio.
 
 \section{Cierre del ciclo: round-trip engineering}
 
 \subsection{Cambio aplicado al modelo}
-% Contenido a completar.
+
+Para comprobar el cierre controlado del ciclo modelo-código se aplicó un cambio significativo sobre la clase \texttt{csSolicitudAdopcion}. Antes de la modificación, la clase permitía cancelar una solicitud mediante la operación \texttt{cancelar(): void}, pero no contenía información que permitiera registrar la causa de la cancelación.
+
+Como mejora del modelo, se añadió el atributo público \texttt{motivoCancelacion: string} y se modificó la operación de cancelación para recibir el parámetro \texttt{motivo: string}. La nueva firma quedó definida como \texttt{cancelar(motivo: string): void}. Este cambio permite representar explícitamente la razón proporcionada por el adoptante al cancelar una solicitud.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{figuras/cap_clase_antes.png}
+	\caption{Clase csSolicitudAdopcion antes de aplicar el cambio de round-trip engineering.}
+	\label{fig:clase_antes}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{figuras/cap_codigo_antes.png}
+	\caption{Código de csSolicitudAdopcion antes de la regeneración.}
+	\label{fig:codigo_antes}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{figuras/cap_clase_despues.png}
+	\caption{Clase csSolicitudAdopcion después de incorporar el motivo de cancelación.}
+	\label{fig:clase_despues}
+\end{figure}
+
+Las Figuras~\ref{fig:clase_antes} y~\ref{fig:clase_despues} muestran el estado de la clase antes y después de la modificación. El cambio afecta tanto la estructura de datos como la operación relacionada con la cancelación, por lo que constituye una modificación funcionalmente relevante para el subsistema de gestión de adopciones.
 
 \subsection{Evidencia antes y después}
-% Contenido a completar.
 
+Una vez guardado el cambio en el modelo UML, se ejecutó nuevamente la extensión C\# Code Generation and Reverse Engineering. Para preservar la evidencia inicial, el código regenerado se almacenó en la carpeta \texttt{VersionRoundtrip}, ubicada en \texttt{C:\textbackslash Generado\textbackslash MundiPets}.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{figuras/cap_codigo_despues.png}
+	\caption{Código de csSolicitudAdopcion después de regenerar el modelo modificado.}
+	\label{fig:codigo_despues}
+\end{figure}
+
+La regeneración produjo una nueva versión del archivo \texttt{csSolicitudAdopcion.cs}. En esta versión se incorporó el campo \texttt{motivoCancelacion} de tipo \texttt{string} y la operación \texttt{cancelar()} fue actualizada para recibir el parámetro \texttt{motivo} de tipo \texttt{string}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{figuras/cap_comparacion_codigo.png}
+	\caption{Comparación del código antes y después de la regeneración.}
+	\label{fig:comparacion_codigo}
+\end{figure}
+
+La Figura~\ref{fig:comparacion_codigo} permite comprobar que el archivo anterior no contenía el atributo \texttt{motivoCancelacion} y presentaba la operación \texttt{cancelar()} sin parámetros. En la versión regenerada ambos cambios aparecen de acuerdo con la modificación realizada en StarUML, demostrando la trazabilidad en dirección modelo a código.
+
+\begin{table}[H]
+	\centering
+	\caption{Comparación de los elementos antes y después de la regeneración.}
+	\label{tab:comparacion_elementos}
+	\begin{tabular}{|l|l|l|}
+		\hline
+		\textbf{Elemento} & \textbf{Antes del cambio} & \textbf{Después del cambio} \\
+		\hline
+		Atributo motivoCancelacion & No existía & Generado como campo string \\
+		\hline
+		Operación de cancelación & cancelar(): void & cancelar(motivo: string): void \\
+		\hline
+		Archivo afectado & csSolicitudAdopcion.cs & csSolicitudAdopcion.cs actualizado \\
+		\hline
+		Dirección comprobada & Modelo a código inicial & Modelo modificado a código regenerado \\
+		\hline
+	\end{tabular}
+\end{table}
+
+La prueba realizada comprobó el cierre del ciclo en dirección modelo a código. No se ejecutó una sincronización completa código a modelo, debido a que el objetivo de la demostración fue verificar la propagación controlada de cambios desde StarUML hacia los archivos C\# generados.
 
 \section{Reparto del trabajo}
 % Contenido a completar.
 
 \section{Conclusiones}
-% Contenido a completar.
+
+La experiencia de aplicar \textit{Model-Driven Development} sobre el módulo de Gestión de Solicitud de Adopción de MundiPets permitió comprobar, en un caso real y acotado, que StarUML es capaz de completar el ciclo básico de generación automática de código a partir de un diagrama de clases validado. Las ocho clases del subsistema se transformaron en igual número de archivos C\# en cuestión de segundos, conservando de forma directa nombres de clases, atributos y firmas de operaciones, lo que confirma el valor de la trazabilidad modelo-código como principio central de MDD.
+
+Sin embargo, el ejercicio también evidenció que el código generado constituye únicamente una base estructural y no una aplicación funcional. La herramienta no produjo lógica de negocio, persistencia, validaciones ni operaciones CRUD completas, y presentó limitaciones concretas de traducción de tipos (\texttt{date}, \texttt{boolean}) que exigieron corrección manual para lograr una compilación exitosa. De igual manera, se identificó que una asociación navegable del modelo no se generó como colección, lo que reforzó la importancia de configurar correctamente la navegabilidad de las relaciones antes de ejecutar el generador, más que un defecto atribuible a la herramienta en sí.
+
+El cierre del ciclo mediante \textit{round-trip engineering} —incorporar el atributo \texttt{motivoCancelacion} y el parámetro correspondiente en la operación \texttt{cancelar()}— permitió verificar de manera práctica que los cambios realizados en el modelo se propagan de forma consistente hacia el código regenerado, validando la trazabilidad en la dirección modelo\,$\rightarrow$\,código dentro del alcance probado por el equipo.
+
+En términos de aprendizaje, el equipo concluye que el valor real de MDD para un proyecto como el PFC no reside en obtener una aplicación terminada de manera automática, sino en acelerar la fase inicial de construcción, reducir errores de transcripción entre el diseño y la implementación, y obligar a que el modelo UML sea preciso y esté libre de errores antes de generar artefactos. Asimismo, se identificó que la elección de la herramienta (StarUML frente a Visual Paradigm) debe responder al alcance real del proyecto y no necesariamente a la herramienta con más funcionalidades disponibles, dado que la simplicidad de configuración resultó más determinante que la madurez de las plantillas ORM para un módulo de ocho clases.
+
+Como limitación general del ejercicio, se reconoce que la generación fue evaluada únicamente en dirección modelo\,$\rightarrow$\,código y sobre un módulo acotado del sistema, por lo que no es posible extrapolar directamente estos resultados a la totalidad del PFC ni a escenarios con sincronización bidireccional completa.
+
+\newpage
 
 \section{Referencias}
 \printbibliography[heading=none]
 
 \section{Anexos}
 % Contenido a completar.
+\subsection{Anexo A: Código fuente completo generado}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{figuras/csusuario.jpeg}
+	\caption{Código generado --- csUsuario.cs}
+	\label{fig:anexo_csusuario}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{figuras/csusuariorol.jpeg}
+	\caption{Código generado --- csUsuarioRol.cs}
+	\label{fig:anexo_csusuariorol}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{figuras/csrol.jpeg}
+	\caption{Código generado --- csRol.cs}
+	\label{fig:anexo_csrol}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{figuras/csmascota.jpeg}
+	\caption{Código generado --- csMascota.cs}
+	\label{fig:anexo_csmascota}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{figuras/cshistorialmedico.jpeg}
+	\caption{Código generado --- csHistorialMedico.cs}
+	\label{fig:anexo_cshistorialmedico}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{figuras/cspublicion.jpeg}
+	\caption{Código generado --- csPublicacion.cs}
+	\label{fig:anexo_cspublicacion}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{figuras/csdocvetrinario.jpeg}
+	\caption{Código generado --- csDocumentoVeterinario.cs}
+	\label{fig:anexo_csdocumentoveterinario}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{figuras/cssolicitudadopcion.jpeg}
+	\caption{Código generado --- csSolicitudAdopcion.cs}
+	\label{fig:anexo_cssolicitudadopcion}
+\end{figure}
+
+\subsection{Anexo B: Fragmento del generador de código}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{figuras/codegeneretor.jpeg}
+	\caption{Fragmento de \texttt{code-generator.js} --- función \texttt{getType()}}
+	\label{fig:anexo_codegenerator}
+\end{figure}
 
 \end{document}
