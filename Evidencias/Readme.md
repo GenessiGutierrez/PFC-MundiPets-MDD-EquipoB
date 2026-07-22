@@ -8,8 +8,6 @@ La demostración en vivo del ciclo MDD (modelado, generación, verificación y r
 
 ▶️ **[Ver demostración en YouTube](https://youtu.be/h538vfvHrF4)**
 
-> ⚠️ **Pendiente:** reemplazar el enlace anterior por la URL real del video de YouTube antes de la entrega.
-
 ## Contenido
 
 | Carpeta | Descripción |
