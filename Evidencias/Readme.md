@@ -6,7 +6,7 @@ Contiene las evidencias del desarrollo de la actividad: capturas del proceso y e
 
 La demostración en vivo del ciclo MDD (modelado, generación, verificación y round-trip) está disponible en el siguiente enlace:
 
-▶️ **[Ver demostración en YouTube](https://youtu.be/COLOCAR_ID_DEL_VIDEO)**
+▶️ **[Ver demostración en YouTube](https://youtu.be/h538vfvHrF4)**
 
 > ⚠️ **Pendiente:** reemplazar el enlace anterior por la URL real del video de YouTube antes de la entrega.
 
